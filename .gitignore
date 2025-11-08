@@ -1,0 +1,28 @@
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.env/
+
+# Node dependencies and build outputs
+node_modules/
+dist/
+
+# Media uploads and runtime files
+media/
+
+# Logs and local data
+*.log
+*.sqlite3
+
+# IDE/editor settings
+.idea/
+.vscode/
+.DS_Store
+
+# Cursor/temporary
+.cursor/
+
