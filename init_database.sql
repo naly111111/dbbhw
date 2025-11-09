@@ -385,7 +385,7 @@ CREATE TABLE messages (
     message_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     sender_id BIGINT,
     recipient_id BIGINT NOT NULL,
-    message_type TINYINT NOT NULL,
+    message_type INT NOT NULL,
     content TEXT NOT NULL,
     related_type TINYINT,
     related_id BIGINT,

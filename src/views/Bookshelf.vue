@@ -98,10 +98,12 @@
           </template>
           <el-table
             v-if="subscriptionRecords.length > 0"
+            ref="subscriptionTable"
             :data="subscriptionRecords"
             border
             stripe
             class="record-table"
+            style="width: 100%"
           >
             <el-table-column label="订阅时间" width="200">
               <template #default="scope">{{ formatDateTime(scope.row.sub_time) }}</template>
@@ -130,10 +132,12 @@
           </template>
           <el-table
             v-if="voteRecords.length > 0"
+            ref="voteTable"
             :data="voteRecords"
             border
             stripe
             class="record-table"
+            style="width: 100%"
           >
             <el-table-column label="投票时间" width="200">
               <template #default="scope">{{ formatDateTime(scope.row.vote_time) }}</template>
@@ -299,6 +303,17 @@ export default {
       commentThreadDialogVisible: false,
       commentThreadLoading: false,
       commentThread: null
+    }
+  },
+  watch: {
+    activeTab(newTab) {
+      this.adjustTableLayout(newTab)
+    },
+    subscriptionRecords() {
+      this.adjustTableLayout('subscriptions')
+    },
+    voteRecords() {
+      this.adjustTableLayout('votes')
     }
   },
   created() {
@@ -481,6 +496,26 @@ export default {
         this.$message.error(error.response?.data?.error || '删除失败，请稍后重试')
         console.error('Delete comment record error:', error)
       }
+    },
+    
+    adjustTableLayout(targetTab) {
+      const refMap = {
+        subscriptions: 'subscriptionTable',
+        votes: 'voteTable'
+      }
+      const refName = refMap[targetTab]
+      if (!refName) return
+      this.$nextTick(() => {
+        const scheduler = typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function'
+          ? window.requestAnimationFrame.bind(window)
+          : (fn) => setTimeout(fn, 16)
+        scheduler(() => {
+          const table = this.$refs[refName]
+          if (table && typeof table.doLayout === 'function') {
+            table.doLayout()
+          }
+        })
+      })
     }
   }
 }

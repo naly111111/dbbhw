@@ -158,7 +158,7 @@ class Message(models.Model):
     message_id = models.BigAutoField(primary_key=True)
     sender_id = models.BigIntegerField(null=True, blank=True)
     recipient_id = models.BigIntegerField()
-    message_type = models.SmallIntegerField()
+    message_type = models.IntegerField()
     content = models.TextField()
     related_type = models.SmallIntegerField(null=True, blank=True)
     related_id = models.BigIntegerField(null=True, blank=True)
