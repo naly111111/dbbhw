@@ -36,11 +36,15 @@
    ```
 
 2. **配置数据库**
+   ```
+   # 执行
+   rebuild_database.bat
+   ```
    - 启动MySQL服务
    - 创建数据库：`CREATE DATABASE novel_platform CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
    - 导入表结构：`mysql -u root -p113442 novel_platform < init_database.sql`
 
-3. **启动应用**
+4. **启动应用**
 
    **方法一：一键启动（推荐）**
    ```bash
@@ -57,13 +61,13 @@
    start_frontend.bat
    ```
 
-4. **测试连接**
+5. **测试连接**
    ```bash
    # 测试服务器连接
    test_connection.bat
    ```
 
-5. **访问应用**
+6. **访问应用**
    - 前端：http://localhost:8080
    - 后端API：http://localhost:8000
 
